@@ -25,10 +25,10 @@ properties([
 if (params.region == "dev") {
     regions = "us-east-1"
 }
-else if (params.region="qa") {
+else if (params.region == "qa") {
     regions = "us-east-2"
 }
-else if (params.region="stage") {
+else if (params.region == "stage") {
     regions = "us-west-1"
 }
 else {
