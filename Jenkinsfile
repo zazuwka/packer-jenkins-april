@@ -18,20 +18,23 @@ def buildNumber = env.BUILD_NUMBER
 
 if (env.BRANCH_NAME == "main") {
     region = "us-east-1"
+    key_pair = "my-laptop-key"
 }
 
 else if (env.BRANCH_NAME == "qa") {
     region = "us-east-2"
+    key_pair = "my-laptop-key"
 }
 
 else if (env.BRANCH_NAME == "dev") {
     region = "us-west-1"
+    key_pair = "my-laptop-key"
 }
 
 else {
     region = "us-west-2"
+    key_pair = "my-laptop-key"
 }
-
 
 
 podTemplate(cloud: 'kubernetes', label: 'packer', yaml: template) {
@@ -46,9 +49,17 @@ podTemplate(cloud: 'kubernetes', label: 'packer', yaml: template) {
             
             stage("Packer build") {
                 sh "packer build -var jenkins_build_number=${buildNumber} packer.pkr.hcl"
+
+                build job: 'Hello-World', 
+                parameters: [
+                    string(name: 'action', value: 'apply'), 
+                    string(name: 'region', value: "${region}"), 
+                    string(name: 'ami_id', value: "my-ami-${buldNumber}"), 
+                    string(name: 'az', value: "${region}b"), 
+                    string(name: 'key_name', value: "${key_pair}")]
             }
         }
     }
 }
-    }
+}
 }
