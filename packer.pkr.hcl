@@ -56,13 +56,6 @@ build {
 }
 
 
-Message april-group-2023
-
-
-
-
-
-
 
 
 
