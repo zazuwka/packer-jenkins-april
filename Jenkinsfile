@@ -22,7 +22,7 @@ properties([
             choices: ['dev', 'qa', 'stage', 'prod'], description: 'Pick environment', name: 'region')
             ])
             ])
-if (params.region="dev") {
+if (params.region == "dev") {
     regions = "us-east-1"
 }
 else if (params.region="qa") {
