@@ -18,28 +18,32 @@ def buildNumber = env.BUILD_NUMBER
 
 properties([
     parameters([
-        choice(
-            choices: ['dev', 'qa', 'stage', 'prod'], description: 'Pick environment', name: 'region')
-            ])
-            ])
+        choice(choices: ['dev', 'qa', 'stage', 'prod'], description: 'Pick environment', name: 'region')
+        ])
+        ])
+
 if (params.region == "dev") {
-    regions = "us-east-1"
+    region = "us-east-1"
 }
+
 else if (params.region == "qa") {
-    regions = "us-east-2"
+    region = "us-east-2"
 }
+
 else if (params.region == "stage") {
-    regions = "us-west-1"
+    region = "us-west-1"
 }
+
 else {
-    regions = "us-west-2"
+    region = "us-west-2"
 }
+
 
 podTemplate(cloud: 'kubernetes', label: 'packer', yaml: template) {
     node("packer") {
         container("packer") {
             withCredentials([usernamePassword(credentialsId: 'aws-creds', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
-            withEnv(["AWS_REGION={$region}"]) {
+            withEnv(["AWS_REGION=${region}"]) {
 
             stage("Checkout SCM") {
                 git branch: 'main', url: 'https://github.com/zazuwka/packer-jenkins-april.git'
