@@ -32,7 +32,6 @@ else {
     region = "us-west-2"
 }
 
-
 podTemplate(cloud: 'kubernetes', label: 'packer', yaml: template) {
     node("packer") {
         container("packer") {
