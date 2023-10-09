@@ -50,7 +50,10 @@ podTemplate(cloud: 'kubernetes', label: 'packer', yaml: template) {
             }
             
             stage("Packer build") {
-                sh "packer build -var jenkins_build_number=${buildNumber} packer.pkr.hcl"
+                sh """
+                packer init .
+              packer build -var jenkins_build_number=${buildNumber} packer.pkr.hcl
+              """
 
                 build job: 'Terraform', 
                 parameters: [
