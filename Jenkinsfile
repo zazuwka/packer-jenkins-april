@@ -19,18 +19,22 @@ def buildNumber = env.BUILD_NUMBER
 
 if (env.BRANCH_NAME == "main") {
     region = "us-east-1"
+    key_pair = "my-laptop-key"
 }
 
 else if (env.BRANCH_NAME == "qa") {
     region = "us-east-2"
+    key_pair = "my-laptop-key"
 }
 
 else if (env.BRANCH_NAME == "dev") {
     region = "us-west-1"
+    key_pair = "my-laptop-key"
 }
 
 else {
     region = "us-west-2"
+    key_pair = "my-laptop-key"
 }
 
 podTemplate(cloud: 'kubernetes', label: 'packer', yaml: template) {
