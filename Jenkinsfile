@@ -17,10 +17,10 @@ spec:
 
 def buildNumber = env.BUILD_NUMBER
 
-if (env.BRANCH_NAME == "main") {
-    region = "us-east-1"
-    key_pair = "my-laptop-key"
-}
+// if (env.BRANCH_NAME == "main") {
+//     region = "us-east-1"
+//     key_pair = "my-laptop-key"
+// }
 
 // else if (env.BRANCH_NAME == "qa") {
 //     region = "us-east-2"
@@ -33,8 +33,8 @@ if (env.BRANCH_NAME == "main") {
 // }
 
 // else {
-//     region = "us-west-2"
-//     key_pair = "my-laptop-key"
+region = "us-west-2"
+key_pair = "my-laptop-key"
 // }
 
 
