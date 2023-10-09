@@ -52,7 +52,7 @@ podTemplate(cloud: 'kubernetes', label: 'packer', yaml: template) {
             stage("Packer build") {
                 sh "packer build -var jenkins_build_number=${buildNumber} packer.pkr.hcl"
 
-                build job: 'Hello-World', 
+                build job: 'Terraform', 
                 parameters: [
                     string(name: 'action', value: 'apply'), 
                     string(name: 'region', value: "${region}"), 
